@@ -1,27 +1,27 @@
 # Realtime data warehousing with Snowflake
-A simple illustration of implementing data streaming and analytics using snowflake. 
-I've created this repository as I haven't found enough resources online, implementing the workflow using Snowflake's new UI, Snowsight.
+A simple illustration of implementing data streaming and analytics using Snowflake. 
+I've created this repository as I haven't found enough resources online which implement the workflow using Snowflake's new UI, Snowsight.
 * * *
 ### What's Snowflake?
 In simple terms, snowflake is a cloud solution to data warehousing, which provides compute resources to run SQL commands on databases and query storage solutions.
 ### Why Snowflake over other Warehouses:
-* Option to choose the cloud provider, instead of tightly binding to one of them (AWS/GCP/Azure)
+* Option to choose the cloud provider instead of tightly binding to one of them (AWS/GCP/Azure)
 * Provides an efficient serverless architecture
 * Queries are stored in the cache for 24hrs saving compute time and resources 
-* Time-travel feature to revert back to query IDs (starts 24hrs for standard account  upto 90 days with Enterprise version)
-* Decouples Compute and Storage and uses columnar compression and other techniques to save costs. 
+* Time-travel feature to revert to query IDs (starts 24hrs for standard account  upto 90 days with Enterprise version)
+* Decouples Compute and Storage and saves costs with columnar compression and other techniques. 
 * Scales efficiently unlike other solutions like Redshift, which scales by compute nodes, charging per hour. 
 * Doesn't charge for data ingress and metadata storage.
 * Provides in-house visualization tools to understand the results while querying.
 
 ### Steps to follow while working with Snowflake:
 * #### Preprocess the data:
-   Standard Data Extraction and Cleansing should be performed for building efficient results. 
+   Standard Data Extraction and Cleansing should be performed to build efficient results. 
    Link to the [Data Preparation Considerations](https://docs.snowflake.com/en/user-guide/data-load-considerations-prepare) documentation to follow before proceeding to the next step.
 * #### Stage the data:
-    An intermediate space to upload the files either from local storage or cloud. Helps to successfully store the data and perform load operation when needed. 
+    An intermediate space to upload the files either from local storage or the cloud. Helps to successfully store the data and perform load operation when needed. 
 * #### Load the data:
-    The data is ingested into the database using the COPY command which the help of several file format attributes.
+    The data is ingested into the database using the COPY command with the help of several file format attributes.
 * #### Manage Regular Workload:
     Create a warehouse compute to query the results. Snowflake offers 3 serverless compute options depending upon the data load and can be scaled anytime. 
 * * *
@@ -53,7 +53,7 @@ Load Tesla Sales Data from cloud storage and perform analytics using the queries
 
     use warehouse my_warehouse;
    ```   
-#### 3. Create a database to storage data:
+#### 3. Create a database to store data:
    ```
     create database test_db;
 
@@ -87,7 +87,7 @@ STORAGE_AWS_ROLE_ARN = '<AWS-ROLE-ARN>'
 ENABLED = TRUE
 STORAGE_ALLOWED_LOCATIONS = ('s3://<bucketname>/');
  ```
-Run the command `DESC INTEGRATION S3_INTEGRATION;` to find `STORAGE_AWS_IAM_USER_ARN` and add it to trusted relationships of your AWS Role. 
+Run the command `DESC INTEGRATION S3_INTEGRATION;` to find `STORAGE_AWS_IAM_USER_ARN` and add it to the trusted relationships of your AWS Role. 
 Now stage the data using the command:
 ```
 CREATE or REPLACE STAGE TESLA_DATA_STAGE
